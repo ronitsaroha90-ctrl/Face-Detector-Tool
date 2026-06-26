@@ -39,8 +39,9 @@ class FaceDetectionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Face Detection Tool")
+        self.root.geometry("900x750")
         self.root.configure(bg=BG_COLOR)
-        self.root.resizable(False, False)
+        self.root.resizable(True, True)
 
         # ── State ─────────────────────────────────────────────────────────
         self.detector       = None
@@ -93,7 +94,7 @@ class FaceDetectionApp:
             font=("Segoe UI", 13),
             fg="#585b70"
         )
-        self.canvas.pack(padx=20, pady=8)
+        self.canvas.pack(padx=20, pady=8, expand=False)
 
         # ── Info row (status + face counter) ──────────────────────────────
         info_frame = tk.Frame(self.root, bg=BG_COLOR)
@@ -119,7 +120,7 @@ class FaceDetectionApp:
 
         # ── Button panel ──────────────────────────────────────────────────
         btn_frame = tk.Frame(self.root, bg=PANEL_COLOR, pady=12)
-        btn_frame.pack(fill="x", padx=0, pady=(4, 0))
+        btn_frame.pack(fill="x", padx=0, pady=(4, 0), side="bottom")
 
         btn_cfg = dict(
             font=("Segoe UI", 10, "bold"),
@@ -182,6 +183,7 @@ class FaceDetectionApp:
         ).pack(pady=(2, 8))
 
         # Intercept window close button
+        self.btn_camera.invoke()
         self.root.protocol("WM_DELETE_WINDOW", self.on_exit)
 
     # ─────────────────────────────────────────────────────────────────────────
